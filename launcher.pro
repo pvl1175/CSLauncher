@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = q4
+TARGET = csl
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
