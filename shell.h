@@ -31,7 +31,13 @@ public:
         m_process2     = new QProcess(this);
         m_process3     = new QProcess(this);
 
+#ifdef Q_OS_LINUX
+        m_pCSFolder = new QLineEdit("/home/vita/testnet");
+#endif
+
+#ifdef Q_OS_WIN
         m_pCSFolder = new QLineEdit("d:\\CREDITS_TEST");
+#endif
 
         m_pTab        = new QTabWidget;
         m_ptxtDisplay1 = new QTextEdit();
@@ -97,9 +103,9 @@ public:
 
     void setProps(QTextEdit* pte)
     {
-        QPalette p = pte->palette(); // define pallete for textEdit..
-        p.setColor(QPalette::Base, Qt::black); // set color "Red" for textedit base
-        pte->setPalette(p); // change textedit palette
+        QPalette p = pte->palette();
+        p.setColor(QPalette::Base, Qt::black);
+        pte->setPalette(p);
 
         pte->setTextColor(QColor(0, 255, 0));
         pte->setFontFamily("Lucida Console");
@@ -143,7 +149,9 @@ public slots:
         m_process3->setWorkingDirectory(env);
 
 #ifdef Q_OS_LINUX
-        QString env{"/home/vita/Desktop/credits"};
+        m_process1->start("./client");
+        m_process2->start("java -jar contract-executor.jar");
+        m_process3->start("java -jar wallet-desktop.jar");
 #endif
 
 #ifdef Q_OS_WIN
